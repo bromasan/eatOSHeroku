@@ -34,6 +34,8 @@ export class ContestSigninComponent implements OnInit {
     return this.userForm.controls;
   }
 
+
+  //creates a user on signin then navigates to contest-begin page
   onSubmit() {
     this.submitted = true;
 
@@ -44,7 +46,7 @@ export class ContestSigninComponent implements OnInit {
         (res) => {
           this.apiService.setId(res._id);
 
-          
+
           this.ngZone.run(() => this.router.navigateByUrl('/contest-begin'))
         }, (error) => {
           console.log(error);

@@ -14,14 +14,17 @@ export class ApiService {
   constructor(private http: HttpClient) {
   };
 
+  //sets the currentUser ID
   setId(id) {
     this.userId = id;
   }
 
+  //get the currentUser ID
   getId() {
     return this.userId;
   }
 
+  //Signup API call
   signInUser(data): Observable<any> {
     let url = `/api/signup`;
     return this.http.post(url, data)
@@ -30,6 +33,7 @@ export class ApiService {
       )
   }
 
+  //Get Question API call
   getQuestion(id): Observable<any> {
     let url = `/api/question/${id}`;
     return this.http.get(url, {headers: this.headers}).pipe(
@@ -40,6 +44,7 @@ export class ApiService {
     )
   }
 
+  //Submit API Call
   submit(data): Observable<any> {
     let url = `/api/submit`;
     return this.http.post(url, data)
@@ -48,6 +53,7 @@ export class ApiService {
       )
   }
 
+  //Get User API Call
   getUser(id) {
     let url = `/api/user/${id}`;
     return this.http.get(url, {headers: this.headers}).pipe(
@@ -58,6 +64,7 @@ export class ApiService {
     )
   }
 
+  //Get Points API
   getPoints(id) {
     let url = `/api/points/${id}`;
     return this.http.get(url, {headers: this.headers}).pipe(

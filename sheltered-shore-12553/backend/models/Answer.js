@@ -19,13 +19,13 @@ let Answer = new Schema({
    collection: 'answers'
 })
 
+//Static method to find all answers with the same question
 Answer.statics.findAnswers = function(id) {
-  console.log("ID", id);
   return this.find({question: id}, null, (err, data) => {
     if(err) {
       return next(err);
     } else {
-      console.log("DATA ",data);
+      console.log("Answers have been found");
     }
   }).lean()
 };

@@ -28,6 +28,7 @@ export class ContestQuestionComponent implements OnInit {
     console.log("CONSTRUCTORRR")
   }
 
+  //Start the timer on load, fetch the question and answers for current ID, fetch User to save ID in user answer
   ngOnInit() {
     this.startTimer();
     this.route.paramMap.pipe(
@@ -41,16 +42,18 @@ export class ContestQuestionComponent implements OnInit {
 
 
   }
-
+  //Refresh the timer
   setTimer() {
     this.timeLeft = 15;
   }
 
+  //stop timer and clear interval
   stopTimer() {
     console.log("stopTimer");
     clearInterval(this.seconds);
   }
 
+  //start the timer
   startTimer() {
     console.log("startTimer");
     this.seconds = setInterval(() => {
@@ -63,9 +66,9 @@ export class ContestQuestionComponent implements OnInit {
     }, 1000)
   }
 
+  //submit the answer, call dialog to open with parameters of correct/incorrect/finished
   onClick(answer) {
     this.stopTimer();
-    console.log("onCLick");
     this.submitted = true;
 
     this.apiService.submit({answer: answer, question: this.Question.question._id, user: this.User._id, qid: this.Question.question.id}).subscribe(
@@ -76,12 +79,11 @@ export class ContestQuestionComponent implements OnInit {
       });
     }
 
+  //opens the dialog, reports if correct/incorrect, then either navigates to next question or final popup
   openDialog(res) {
-    console.log("openDialog");
     if (res.alert === "fin") {
       this.apiService.getPoints(this.User._id).subscribe(
         (resP) => {
-          console.log("RESP:",resP);
           let dialogRefEnd = this.matDialog.open(ContestFinishComponent, {
                                                                               height : "15em",
                                                                               width : "30em",

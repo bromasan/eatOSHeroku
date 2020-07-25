@@ -36,8 +36,6 @@ const server = app.listen(port, () => {
   console.log('Connected to port ' + port)
 })
 
-
-
 // error handler
 app.use(function (err, req, res, next) {
   console.error(err.message); // Log error message in our server's console

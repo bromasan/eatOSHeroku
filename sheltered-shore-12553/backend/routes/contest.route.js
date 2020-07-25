@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const contestRoute = express.Router();
 
-
 let User = require('../models/User');
 let Question = require('../models/Question');
 let Answer = require('../models/Answer');
@@ -26,8 +25,6 @@ contestRoute.route('/question/:id').get((req, res, next) => {
     if (error) {
       return next(error)
     } else {
-
-
       let answers = Answer.findAnswers(data._id);
       answers.exec((error, answers) => {
         if (error){
@@ -77,7 +74,7 @@ contestRoute.route('/user/:_id').get((req, res, next) => {
   })
 });
 
-//Get Points
+//Get Points API
 contestRoute.route('/points/:id').get((req, res, next) => {
   UserAnswer.find({user: req.params.id}, (error, data) => {
     if (error) {
